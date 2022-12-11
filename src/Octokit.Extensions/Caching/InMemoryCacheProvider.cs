@@ -16,6 +16,7 @@ namespace Octokit.Extensions
         }
         public async Task Add(CacheKey key, CacheEntry entry)
         {
+            await Task.CompletedTask;
             _cache.Set(key,entry);
         }
 
@@ -26,16 +27,19 @@ namespace Octokit.Extensions
 
         public async Task<bool> Exists(CacheKey key)
         {
+            await Task.CompletedTask;
            return _cache.TryGetValue(key,out _);
         }
 
         public async Task<CacheEntry> Get(CacheKey key)
         {
+            await Task.CompletedTask;
             return _cache.Get<CacheEntry>(key);
         }
 
         public async Task Remove(CacheKey key)
         {
+            await Task.CompletedTask;
             _cache.Remove(key);
         }
     }

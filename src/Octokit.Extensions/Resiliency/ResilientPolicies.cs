@@ -68,6 +68,7 @@ namespace Octokit.Extensions
            sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
            onRetryAsync: async (exception, retryCount) =>
            {
+               await Task.CompletedTask;
                _logger?.LogInformation("A {exception} has occurred with {message}. Will try again shortly.", "ApiException",exception.Message);
            });
 
