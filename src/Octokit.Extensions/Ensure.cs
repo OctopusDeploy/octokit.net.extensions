@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace Octokit.Extensions
 {
-
     /// <summary>
-    /// This class is the exact copy of https://github.com/octokit/octokit.net/blob/master/Octokit/Helpers/Ensure.cs
-    ///   Ensure input parameters
+    ///     This class is the exact copy of https://github.com/octokit/octokit.net/blob/master/Octokit/Helpers/Ensure.cs
+    ///     Ensure input parameters
     /// </summary>
     internal static class Ensure
     {
         /// <summary>
-        /// Checks an argument to ensure it isn't null.
+        ///     Checks an argument to ensure it isn't null.
         /// </summary>
-        /// <param name = "value">The argument value to check</param>
-        /// <param name = "name">The name of the argument</param>
+        /// <param name="value">The argument value to check</param>
+        /// <param name="name">The name of the argument</param>
         public static void ArgumentNotNull(object value, string name)
         {
             if (value != null) return;
@@ -25,10 +22,10 @@ namespace Octokit.Extensions
         }
 
         /// <summary>
-        /// Checks a string argument to ensure it isn't null or empty.
+        ///     Checks a string argument to ensure it isn't null or empty.
         /// </summary>
-        /// <param name = "value">The argument value to check</param>
-        /// <param name = "name">The name of the argument</param>
+        /// <param name="value">The argument value to check</param>
+        /// <param name="name">The name of the argument</param>
         public static void ArgumentNotNullOrEmptyString(string value, string name)
         {
             ArgumentNotNull(value, name);
@@ -38,10 +35,10 @@ namespace Octokit.Extensions
         }
 
         /// <summary>
-        /// Checks a timespan argument to ensure it is a positive value.
+        ///     Checks a timespan argument to ensure it is a positive value.
         /// </summary>
-        /// <param name = "value">The argument value to check</param>
-        /// <param name = "name">The name of the argument</param>
+        /// <param name="value">The argument value to check</param>
+        /// <param name="name">The name of the argument</param>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public static void GreaterThanZero(TimeSpan value, string name)
         {
