@@ -4,6 +4,7 @@ using Polly;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Polly.Retry;
 
 namespace Octokit.Extensions
 {
@@ -15,7 +16,7 @@ namespace Octokit.Extensions
         {
             _logger = logger;
         }
-        public  Policy DefaultHttpRequestExceptionPolicy => Policy.Handle<HttpRequestException>()
+        public AsyncRetryPolicy DefaultHttpRequestExceptionPolicy => Policy.Handle<HttpRequestException>()
             .WaitAndRetryForeverAsync(
             sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
             onRetry: (exception, timespan) =>
@@ -23,7 +24,7 @@ namespace Octokit.Extensions
                 _logger?.LogInformation("A {exception} has occurred. Next try will happen in {time} seconds", "HttpRequestException",timespan.TotalSeconds);
             });
 
-        public Policy DefaultTimeoutExceptionPolicy => Policy.Handle<TaskCanceledException>(ex => !ex.CancellationToken.IsCancellationRequested)
+        public AsyncRetryPolicy DefaultTimeoutExceptionPolicy => Policy.Handle<TaskCanceledException>(ex => !ex.CancellationToken.IsCancellationRequested)
             .WaitAndRetryForeverAsync(
             sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
             onRetry: (exception, timespan) =>
@@ -31,7 +32,7 @@ namespace Octokit.Extensions
                 _logger?.LogInformation("A {exception} has occurred. Next try will happen in {time} seconds", "TaskCanceledException", timespan.TotalSeconds);
             });
 
-        public Policy DefaultRateLimitExceededExceptionPolicy => Policy.Handle<RateLimitExceededException>()
+        public AsyncRetryPolicy DefaultRateLimitExceededExceptionPolicy => Policy.Handle<RateLimitExceededException>()
             .RetryAsync(
             retryCount: 1,
             onRetryAsync: async (exception, retryCount) =>
@@ -46,7 +47,7 @@ namespace Octokit.Extensions
                 await Task.Delay(sleepMilliseconds).ConfigureAwait(false);
             });
 
-        public Policy DefaultAbuseExceptionExceptionPolicy => Policy.Handle<AbuseException>()
+        public AsyncRetryPolicy DefaultAbuseExceptionExceptionPolicy => Policy.Handle<AbuseException>()
            .RetryAsync(
             retryCount: 1,
             onRetryAsync: async (exception, retryCount) =>
@@ -62,12 +63,13 @@ namespace Octokit.Extensions
                 .ConfigureAwait(false);
             });
 
-        public Policy DefaultOctokitApiExceptionExceptionPolicy => Policy.Handle<Octokit.ApiException>()
+        public AsyncRetryPolicy DefaultOctokitApiExceptionExceptionPolicy => Policy.Handle<Octokit.ApiException>()
           .WaitAndRetryAsync(
            retryCount: 3,
            sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
            onRetryAsync: async (exception, retryCount) =>
            {
+               await Task.CompletedTask;
                _logger?.LogInformation("A {exception} has occurred with {message}. Will try again shortly.", "ApiException",exception.Message);
            });
 

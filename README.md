@@ -1,4 +1,4 @@
-# oktokit.Extensions
+# octokit.Extensions
 This library extends octokit.net, the well-known GitHub client, by enriching it with **caching**, **resilient connections** and **logging** capabilities. In fact, using this library your process won't halt in case of happening exceptions such as Rate Limit, Abuse, Http Exceptions and you will consume your rate limit more wisely. 
 
 Octokit.Extension adds a middleware to the Octokit's _HttpClient_ and will try to resend the requests if anything goes wrong. There are some built-in policies that define how Octokit.Extensions should act to handle the exceptions. However, you can easily define your own custom policies to deal with exceptions based on your requirements.
