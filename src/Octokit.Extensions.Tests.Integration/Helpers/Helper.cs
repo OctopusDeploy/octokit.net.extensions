@@ -1,25 +1,24 @@
 ﻿using System;
 
-namespace Octokit.Extensions.Tests.Integration
+namespace Octokit.Extensions.Tests.Integration;
+
+public static class Helper
 {
-    public static class Helper
+    private static readonly Lazy<Credentials> _credentialsThunk = new(() =>
     {
-        static readonly Lazy<Credentials> _credentialsThunk = new Lazy<Credentials>(() =>
-        {
-            var githubToken = Environment.GetEnvironmentVariable("OCTOKIT_OAUTHTOKEN");
+        var githubToken = Environment.GetEnvironmentVariable("OCTOKIT_OAUTHTOKEN");
 
-            if (githubToken != null)
-                return new Credentials(githubToken);
+        if (githubToken != null)
+            return new Credentials(githubToken);
 
-            var githubUsername = Environment.GetEnvironmentVariable("OCTOKIT_GITHUBUSERNAME");
-            var githubPassword = Environment.GetEnvironmentVariable("OCTOKIT_GITHUBPASSWORD");
+        var githubUsername = Environment.GetEnvironmentVariable("OCTOKIT_GITHUBUSERNAME");
+        var githubPassword = Environment.GetEnvironmentVariable("OCTOKIT_GITHUBPASSWORD");
 
-            if (githubUsername == null || githubPassword == null)
-                return Credentials.Anonymous;
+        if (githubUsername == null || githubPassword == null)
+            return Credentials.Anonymous;
 
-            return new Credentials(githubUsername, githubPassword);
-        });
+        return new Credentials(githubUsername, githubPassword);
+    });
 
-        public static Credentials Credentials { get { return _credentialsThunk.Value; } }
-    }
+    public static Credentials Credentials => _credentialsThunk.Value;
 }

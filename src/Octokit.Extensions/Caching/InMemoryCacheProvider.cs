@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Octokit.Extensions
 {
@@ -10,14 +8,15 @@ namespace Octokit.Extensions
     {
         private readonly MemoryCache _cache;
 
-        public InMemoryCacheProvider(MemoryCacheOptions memoryCacheOptions=null)
+        public InMemoryCacheProvider(MemoryCacheOptions memoryCacheOptions = null)
         {
-            _cache= new MemoryCache(memoryCacheOptions?? new MemoryCacheOptions());
+            _cache = new MemoryCache(memoryCacheOptions ?? new MemoryCacheOptions());
         }
+
         public async Task Add(CacheKey key, CacheEntry entry)
         {
             await Task.CompletedTask;
-            _cache.Set(key,entry);
+            _cache.Set(key, entry);
         }
 
         public Task ClearAll()
@@ -28,7 +27,7 @@ namespace Octokit.Extensions
         public async Task<bool> Exists(CacheKey key)
         {
             await Task.CompletedTask;
-           return _cache.TryGetValue(key,out _);
+            return _cache.TryGetValue(key, out _);
         }
 
         public async Task<CacheEntry> Get(CacheKey key)
