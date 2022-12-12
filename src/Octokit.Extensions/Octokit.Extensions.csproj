@@ -13,7 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <Version>1.0.7</Version>
     <PackageTags>octokit</PackageTags>
-    <PackageLicenseUrl>https://github.com/mirsaeedi/octokit.net.Extensions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageId>Octopus.Octokit.Net.Extensions</PackageId>
     <AssemblyName>Octokit.Extensions</AssemblyName>
     <RootNamespace>Octokit.Extensions</RootNamespace>
@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Octokit" Version="4.0.3" />
-    <PackageReference Include="Polly" Version="6.1.0" />
+    <PackageReference Include="Polly" Version="7.2.3" />
   </ItemGroup>
 
 </Project>
