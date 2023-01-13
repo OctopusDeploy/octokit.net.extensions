@@ -15,8 +15,8 @@ namespace Octokit.Extensions
         {
             this.logger = logger;
         }
-        
-        public Octokit.GraphQL.Connection Create(
+
+        public GraphQL.Connection Create(
             GraphQL.ProductHeaderValue productHeaderValue,
             string token,
             ICacheProvider cacheProvider = null,
@@ -25,11 +25,11 @@ namespace Octokit.Extensions
             if (policies is null || policies.Length == 0)
                 policies = new ResilientPolicies(logger).DefaultResilientPolicies;
 
-            var policy = policies.Length > 1 
-                ? Policy.WrapAsync(policies) 
+            var policy = policies.Length > 1
+                ? Policy.WrapAsync(policies)
                 : policies[0];
-            
-            var connection = new Octokit.GraphQL.Connection(
+
+            var connection = new GraphQL.Connection(
                 productHeaderValue,
                 GraphQL.Connection.GithubApiUri,
                 new InMemoryCredentialStore(token),
@@ -38,18 +38,16 @@ namespace Octokit.Extensions
 
             return connection;
         }
-        
+
         private HttpMessageHandler GetHttpHandlerChain(IAsyncPolicy policy, ICacheProvider cacheProvider)
         {
             var handler = HttpMessageHandlerFactory.CreateDefault();
 
-            handler = new GitHubResilientHandler(handler, policy, this.logger);
+            handler = new GitHubResilientHandler(handler, policy, logger);
 
             if (cacheProvider != null)
-            {
                 //handler = new HttpCacheHandler(handler,cacheProvider,logger); 
                 throw new NotImplementedException("GraphQL caching is not supported by GitHub yet");
-            }
 
             return handler;
         }
