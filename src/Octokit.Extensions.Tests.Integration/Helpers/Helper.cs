@@ -21,4 +21,5 @@ public static class Helper
     });
 
     public static Credentials Credentials => _credentialsThunk.Value;
+    public static string Token => Environment.GetEnvironmentVariable("OCTOKIT_GITHUBPASSWORD");
 }
