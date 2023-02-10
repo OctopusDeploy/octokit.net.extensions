@@ -82,6 +82,9 @@ namespace Octokit.Extensions
         {
             var primaryKey = new CacheKey(request.RequestUri);
             var entry = await CacheEntry.Create(response).ConfigureAwait(false);
+            _logger?.LogInformation("Caching response returned. ETAG: {etag}, URI:{URI}",
+                entry.ETag.Tag,
+                request.RequestUri.AbsolutePath);
             await _cache.Add(primaryKey, entry).ConfigureAwait(false);
         }
 
