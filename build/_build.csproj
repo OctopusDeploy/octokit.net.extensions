@@ -9,6 +9,8 @@
     <NukeScriptDirectory>..</NukeScriptDirectory>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NukeTelemetryVersion>1</NukeTelemetryVersion>
+    <!-- see https://github.com/nuke-build/nuke/pull/1281 -->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
 
   <ItemGroup>
