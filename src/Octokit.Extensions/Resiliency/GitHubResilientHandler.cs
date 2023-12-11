@@ -93,7 +93,7 @@ namespace Octokit.Extensions
 
             var githubResponse =
                 await (dynamic)buildResponseMethod.Invoke(_httpClientAdapter.Value,
-                    new object[] { clonedHttpResponse });
+                    new object[] { clonedHttpResponse, null });
 
             return githubResponse as IResponse;
         }
