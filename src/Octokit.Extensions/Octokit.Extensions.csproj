@@ -26,7 +26,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Octokit" Version="9.1.0" />
     <PackageReference Include="Octokit.GraphQL" Version="0.1.9-beta" />
-    <PackageReference Include="Polly" Version="8.2.0" />
+    <PackageReference Include="Polly" Version="8.2.1" />
   </ItemGroup>
 
 </Project>
