@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-    <PackageReference Include="Octokit" Version="13.0.0" />
+    <PackageReference Include="Octokit" Version="13.0.1" />
     <PackageReference Include="Octokit.GraphQL" Version="0.1.9-beta" />
     <PackageReference Include="Polly" Version="8.4.1" />
   </ItemGroup>
