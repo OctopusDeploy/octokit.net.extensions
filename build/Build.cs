@@ -28,7 +28,7 @@ class Build : NukeBuild
     [Parameter("Test filter expression", Name = "where")] readonly string TestFilter = string.Empty;
 
     [OctoVersion(BranchMember = nameof(BranchName), AutoDetectBranchMember = nameof(AutoDetectBranch),
-        Framework = "net8.0")]
+        Framework = "net10.0")]
     public OctoVersionInfo OctoVersionInfo;
 
     [Parameter(
